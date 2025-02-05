@@ -1,32 +1,50 @@
 {
-"update_url": "https://clients2.google.com/service/update2/crx",
-
-  "manifest_version": 2,
-  "name": "Leaf Browser",
-  "version": "1.2",
-  "author": "Richard Lobo <codingcat@protonmail.com>",
-
-  "description": "The continuation of the project Leaf Browser Alpha.",
-  "icons": {
-    "16": "images/icon16.png",
-    "32": "images/icon32.png",
-    "48": "images/icon48.png",
-    "128": "images/icon128.png"
-  },
-
-  "app": {
-    "background": {
-      "scripts": ["background.js"]
-    }
-  },
-  "permissions": [
-    "storage",
-    "webview",
-    "audioCapture",
-    "videoCapture",
-    "fullscreen",
-    "pointerLock",
-    "http://*/*",
-    "https://*/*"
-    ]
-}
+  "update_url": "https://clients2.google.com/service/update2/crx",
+  
+      "manifest_version": 3,
+      "name": "HS Browser",
+      "description": "Browser for students, by students.",
+      "version": "1.0.0",
+      "action": {
+          "default_icon": "images/icon16.png",
+          "default_title": "Click to open HS Browser"
+      },
+      "side_panel": {
+          "default_path": "index.html",
+          "default_title": "HS Browser",
+          "open_at_install": true,
+          "openPanelOnActionClick": true
+      },
+      "content_scripts": [
+          {
+              "all_frames": true,
+              "matches": ["*://*/*"],
+              "match_about_blank": true,
+              "js": ["background.js"],
+              "run_at": "document_start"
+          }
+      ],
+      "icons": {
+          "16": "images/icon16.png",
+          "48": "images/icon48.png",
+          "128": "images/icon128.png"
+      },
+      "permissions": [
+          "sidePanel",
+          "bookmarks",
+          "favicon",
+          "contextMenus",
+          "storage",
+          "declarativeNetRequestWithHostAccess"
+      ],
+      "optional_host_permissions": [],
+      "web_accessible_resources": [
+          {
+              "resources": ["_favicon/*"],
+              "matches": ["<all_urls>"],
+              "extension_ids": ["*"]
+          }
+      ],
+      "host_permissions": ["<all_urls>"],
+      "minimum_chrome_version": "114"
+  }
